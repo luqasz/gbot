@@ -1,0 +1,31 @@
+[package]
+authors = [
+    "Łukasz Kostka <lukasz.g.kostka@gmail.com>"
+]
+edition = "2021"
+description = "GBot suite source code."
+readme = "README.md"
+name = "gbot"
+version = "0.1.0"
+
+[dependencies]
+fugit = "0.3.7"
+nb = "1.1.0"
+panic-halt = "0.2.0"
+# panic-itm = "0.4.1"
+stm32f1xx-hal = { version = "0.10.0", features = ["stm32f103", "rt", "medium"] }
+
+[[bin]]
+name = "firmware"
+test = false
+bench = false
+
+[profile.release]
+opt-level = "s"
+codegen-units = 1 # better optimizations
+debug = true # symbols are nice and they don't increase the size on Flash
+lto = true # better optimizations
+
+[target.'cfg(all(target_arch = "arm", target_os = "none"))'.dependencies]
+cortex-m = "0.7.7"
+cortex-m-rt = "0.7.3"
