@@ -1,0 +1,10 @@
+[package]
+name = "gbot_engine"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "gbot_engine"
+
+[dependencies]
+shared = { path = "../shared"}
