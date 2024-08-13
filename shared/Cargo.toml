@@ -6,8 +6,8 @@ edition = "2021"
 [dependencies]
 fugit = "0.3.7"
 gcode = { version = "0.6.1", default-features = false }
-heapless = { version = "<0.8.0", default-features = false }
-num_enum = { version = "0.7.1", default-features = false }
-postcard = { version = "1.0.8", features = ["use-crc"] }
-serde = { version = "1.0.192", default-features = false }
-serde_with = { version = "3.4.0", default-features = false, features = ["macros"] }
+heapless = { version = "0.7.17", default-features = false }
+num_enum = { version = "0.*", default-features = false }
+postcard = { version = "1.*", features = ["use-crc"] }
+serde = { version = "1.*", default-features = false }
+serde_with = { version = "3.*", default-features = false, features = ["macros"] }

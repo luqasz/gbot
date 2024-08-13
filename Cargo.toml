@@ -5,3 +5,7 @@ members = [
     "shared",
 ]
 
+[profile.release]
+lto=true
+codegen-units=1
+incremental=false
