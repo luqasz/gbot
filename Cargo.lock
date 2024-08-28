@@ -113,6 +113,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "funty"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e6d5a32815ae3f33302d95fdcb2ce17862f8c65363dcfd29360480ba1001fc9c"
+
+[[package]]
 name = "gbot_engine"
 version = "0.1.0"
 dependencies = [
@@ -307,6 +313,7 @@ name = "shared"
 version = "0.1.0"
 dependencies = [
  "fugit",
+ "funty",
  "gcode",
  "heapless",
  "num_enum",

@@ -44,7 +44,6 @@ pub enum Axis {
 pub enum Direction {
     Left = 0,
     Right = 1,
-    Delay = 2,
 }
 
 // Do not change numbers !
@@ -53,12 +52,12 @@ pub enum Direction {
 )]
 #[repr(u8)]
 pub enum CommandId {
-    FirmwareInfo = 0,
-    FanInfo = 1,
+    GetFirmwareInfo = 0,
+    GetFanInfo = 1,
     SetFanPWM = 2,
-    AnalogRead = 3,
+    GetADCReading = 3,
     SpinStepper = 4,
-    StepperInfo = 5,
+    GetStepperInfo = 5,
 }
 
 // Do not change numbers !
@@ -71,32 +70,20 @@ pub enum CommandResult {
     InvalidId = 1,
 }
 
-#[derive(Deserialize, Serialize, Clone, Copy, Debug, PartialEq)]
-pub struct FirmwareInfo {
-    pub major: u8,
-    pub minor: u8,
-    pub patch: u8,
-    pub protocol_version: u8,
-}
-
-#[derive(Deserialize, Serialize, Clone, Copy, Debug, PartialEq)]
-pub struct FanInfo {
-    pub fan: u8,
-    pub max_pwm: u16,
-    pub pwm_val: u16,
-    pub rpm: u16,
-}
+/*
+* TODO
+* Bulk info command returning ? Will reduce round trip time
+*   firmware info: major, minor, patch, protocol_version
+*   fans: ids, pwm values, max pwm values, rpm (in Hz ?)
+*   adc: channels ids, values
+*   steppers: resolution in Hz, slots?, micro stepping, interpolation
+*
+*/
 
 #[derive(Deserialize, Serialize, Clone, Copy, Debug, PartialEq)]
 pub struct SetFanPWM {
     pub fan: u8,
     pub pwm: u16,
-}
-
-#[derive(Deserialize, Serialize, Clone, Copy, Debug, PartialEq)]
-pub struct AnalogRead {
-    pub channel: u8,
-    pub val: u16,
 }
 
 #[serde_as]
@@ -107,16 +94,6 @@ pub struct SpinStepper {
     pub countt: u16,
     pub axis: Axis,
     pub direction: Direction,
-}
-
-#[serde_as]
-#[derive(Deserialize, Serialize, Clone, Copy, Debug, PartialEq)]
-pub struct StepperInfo {
-    #[serde_as(as = "SerHz32")]
-    pub resolution: HertzU32,
-    pub slots: u16,
-    pub usteps: u8,
-    pub interpolate: u8,
 }
 
 #[cfg(test)]
